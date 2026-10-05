@@ -3,7 +3,7 @@ from scripts.build import apply_rows, HEADERS, seconds, read_rows, ROOT
 class ImportTests(unittest.TestCase):
  def rows(self,*rows): return [(1,HEADERS)]+[(i+2,r) for i,r in enumerate(rows)]
  def test_template(self):
-  result=apply_rows({},read_rows(ROOT/'imports'/'20261005-001.xlsx'))
+  result=apply_rows({},self.rows(['新增','测试','数学实景题','我是数学王子','我爱数学','3','1']))
   self.assertEqual(result['测试']['delay2'],60)
  def test_optional_and_defaults(self):
   result=apply_rows({},self.rows(['新增','A','题目','提示','','','']))['A']

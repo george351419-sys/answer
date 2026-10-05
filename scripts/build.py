@@ -68,7 +68,7 @@ def build():
     shutil.copytree(ROOT/'assets', out/'assets')
     shell = (ROOT/'index.html').read_text()
     (out/'index.html').write_text(shell)
-    (out/'404.html').write_text(shell)
+    (out/'404.html').write_text(shell.replace('href="assets/', 'href="/answer/assets/').replace('src="assets/', 'src="/answer/assets/'))
     (out/'.nojekyll').touch()
     links = []
     for key, item in catalog.items():
