@@ -34,7 +34,12 @@ if (!question) {
       $('timer2').textContent = state.first ? formatTime(state.remaining2) : '';
       if (state.first) {
         $('status2').textContent = state.second ? '已解锁' : '思考时间';
-        $('second-note').textContent = '结合第一条提示，再试一试。';
+        $('second-pending').hidden = true;
+        $('wait2').hidden = state.second;
+        $('second').classList.remove('secondary');
+        $('second').classList.add('active');
+        const progress2 = Math.max(0, Math.min(100, (Date.now() - start - question.delay1 * 1000) / (question.delay2 * 1000) * 100));
+        $('dial2').style.setProperty('--progress', `${progress2}%`);
       }
       if (state.second && !secondShown) {
         secondShown = true; $('wait2').hidden = true;
