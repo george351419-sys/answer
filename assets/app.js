@@ -1,3 +1,4 @@
+import {renderMarkdown} from './markdown.js';
 import {getState, formatTime} from './timing.js';
 const $ = id => document.getElementById(id);
 const question = JSON.parse($('question').textContent);
@@ -27,7 +28,7 @@ if (!question) {
     if (state.first && !firstShown) {
       firstShown = true;
       $('wait1').hidden = true; $('bottom1').hidden = true;
-      $('hint1').textContent = question.hint1; $('hint1').hidden = false;
+      renderMarkdown($('hint1'), question.hint1); $('hint1').hidden = false;
       $('hint1').setAttribute('role', 'status'); $('status1').textContent = '已解锁';
     }
     if (question.hint2) {
@@ -43,7 +44,7 @@ if (!question) {
       }
       if (state.second && !secondShown) {
         secondShown = true; $('wait2').hidden = true;
-        $('hint2').textContent = question.hint2; $('hint2').hidden = false;
+        renderMarkdown($('hint2'), question.hint2); $('hint2').hidden = false;
         $('hint2').setAttribute('role', 'status');
       }
     }
